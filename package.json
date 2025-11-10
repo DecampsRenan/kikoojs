@@ -58,7 +58,9 @@
     "vitest": "4.0.8"
   },
   "dependencies": {
+    "cursor-effects": "1.0.17",
     "easter-egg-collection": "1.4.56",
-    "powerglitch": "2.5.0"
+    "powerglitch": "2.5.0",
+    "ts-pattern": "5.9.0"
   }
 }

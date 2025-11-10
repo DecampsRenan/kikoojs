@@ -1,0 +1,141 @@
+import * as cursors from "cursor-effects";
+import { useLayoutEffect, useMemo, useState } from "react";
+import { match, P } from "ts-pattern";
+
+type Cursor =
+	| "rainbowCursor"
+	| "springyEmojiCursor"
+	| "bubbleCursor"
+	| "fairyDustCursor"
+	| "emojiCursor"
+	| "textFlag"
+	| "trailingCursor"
+	| "followingDotCursor"
+	| "characterCursor";
+
+type CursorConfig =
+	| {
+			name: "rainbowCursor";
+			config: {
+				length: number;
+				colors: Array<string>;
+				size: number;
+			};
+	  }
+	| {
+			name: "springyEmojiCursor";
+			config: {
+				emoji: string;
+			};
+	  }
+	| {
+			name: "bubbleCursor";
+			config: {
+				fillColor: string;
+				strokeColor: string;
+			};
+	  }
+	| {
+			name: "fairyDustCursor";
+			config: {
+				colors: Array<string>;
+				fairySymbol: string;
+			};
+	  }
+	| {
+			name: "emojiCursor";
+			config: {
+				emoji: Array<string>;
+				delay: number;
+			};
+	  }
+	| {
+			name: "textFlag";
+			config: {
+				text: string;
+				color: Array<string>;
+			};
+	  }
+	| {
+			name: "trailingCursor";
+			config: {
+				particles: number;
+				rate: number;
+				baseImageSrc: string;
+			};
+	  }
+	| {
+			name: "followingDotCursor";
+			config: {
+				color: Array<string>;
+			};
+	  }
+	| {
+			name: "characterCursor";
+			config: {
+				element: HTMLElement;
+				characters: Array<string>;
+				font: string;
+				colors: Array<string>;
+				characterLifeSpanFunction: () => number;
+				initialCharacterVelocityFunction: () => { x: number; y: number };
+				characterVelocityChangeFunctions: {
+					x_func: (age: number, lifeSpan: number) => number;
+					y_func: (age: number, lifeSpan: number) => number;
+				};
+				characterScalingFunction: (age: number, lifeSpan: number) => number;
+				characterNewRotationDegreesFunction: (
+					age: number,
+					lifeSpan: number,
+				) => number;
+			};
+	  };
+
+export type UseCursorsOptions = {
+	enabledCursors: Cursor | Array<Cursor> | CursorConfig | Array<CursorConfig>;
+	containerElement?: HTMLElement | null;
+};
+
+export const useCursors = (options: UseCursorsOptions) => {
+	const { enabledCursors, containerElement = document.body } = useMemo(
+		() => options ?? {},
+		[options],
+	);
+
+	const commonOptions = useMemo(
+		() => ({
+			element: containerElement ?? undefined,
+		}),
+		[containerElement],
+	);
+
+	useLayoutEffect(() => {
+		if (containerElement === null) return;
+		const cursorInstances = match(enabledCursors)
+			.with(P.string, (cursorEffect: Cursor) => [
+				new cursors[cursorEffect](commonOptions),
+			])
+			.with(P.array(P.string), (cursorEffectConfig) =>
+				cursorEffectConfig.map((effect) => new cursors[effect]()),
+			)
+			.with({ name: P.string, config: P.unknown }, (cursorEffectConfig) => [
+				new cursors[cursorEffectConfig.name]({
+					...commonOptions,
+					...cursorEffectConfig.config,
+				}),
+			])
+			.with(
+				P.array({ name: P.string, config: P.unknown }),
+				(cursorEffectConfig) =>
+					cursorEffectConfig.map(
+						(effect) =>
+							new cursors[effect.name]({ ...commonOptions, ...effect.config }),
+					),
+			)
+			.exhaustive();
+
+		return () => {
+			cursorInstances.forEach((cursor) => cursor.destroy());
+		};
+	}, [enabledCursors, commonOptions, containerElement]);
+};

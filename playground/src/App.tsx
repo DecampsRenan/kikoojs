@@ -1,4 +1,7 @@
-import { useElevator, useGlitch } from "../../src";
+import { useRef } from "react";
+import { version } from "../../package.json";
+
+import { useCursors, useElevator, useGlitch } from "../../src";
 
 export function App() {
 	const glitchRef = useGlitch<HTMLHeadingElement>();
@@ -8,31 +11,91 @@ export function App() {
 		endAudio: "/sfx/ding.mp3",
 	});
 
+	const cursorContainerEltRef = useRef<HTMLDivElement>(null);
+
+	useCursors({
+		enabledCursors: "fairyDustCursor",
+		containerElement: cursorContainerEltRef.current,
+	});
+
 	return (
-		<div className="space-y-10 flex flex-col items-center mt-10">
+		<div className="space-y-10 flex flex-col mt-40 max-w-xl m-auto">
+			<div className="space-y-0">
+				<div className="flex">
+					<h1 className="text-4xl font-extrabold" ref={glitchRef}>
+						KikooJS
+					</h1>
+					<span className="text-sm">v{version}</span>
+				</div>
+				<span>
+					✨ You never asked for it — now it’s real. All the fun libs in one
+					package ✨
+				</span>
+			</div>
+
+			<div className=" self-center font-mono bg-gray-700 rounded px-4 py-2 shadow-inner">
+				&gt; npm install kikoojs
+			</div>
+
+			<div className="flex">
+				<h2 className="text-2xl font-bold">What's inside ?</h2>
+			</div>
+
 			<div className="space-y-0 text-left">
-				<h1 className="text-4xl" ref={glitchRef}>
-					✨ Glitch element
-				</h1>
-				<small>
+				<h1 className="text-3xl">✨ Glitch element</h1>
+				<span className="text-xs">
 					Powered by{" "}
 					<a
 						className="underline underline-offset-2"
 						href="https://github.com/7PH/powerglitch"
+						target="_blank"
+						rel="noopener"
 					>
 						powerglitch
 					</a>
-				</small>
+				</span>
+			</div>
+			<div className="space-y-0 text-left">
+				<div
+					ref={cursorContainerEltRef}
+					className="flex relative h-60 border border-gray-400 rounded-sm"
+				>
+					<div className="m-auto">Custom cursors</div>
+				</div>
+				<span className="text-xs">
+					Powered by{" "}
+					<a
+						className="underline underline-offset-2"
+						href="https://github.com/tholman/cursor-effects"
+						target="_blank"
+						rel="noopener"
+					>
+						90's Cursor Effects
+					</a>
+				</span>
 			</div>
 
-			<div className="flex h-60 w-80 border border-gray-400 rounded-sm">
-				<div className="m-auto">Custom cursors</div>
+			<div>
+				<p>
+					Try typing "hi", "no", "homer", "bravo" or "lol" (there is many more,
+					all options not listed here)
+				</p>
+				<span className="text-xs">
+					Powered by{" "}
+					<a
+						className="underline underline-offset-2"
+						href="https://github.com/WeiChiaChang/easter-egg-collection"
+						target="_blank"
+						rel="noopener"
+					>
+						Easter Eggs Collection
+					</a>
+				</span>
 			</div>
 
-			<div className="flex h-[5600px] w-80 border border-gray-400 rounded-sm">
+			<div className="flex h-[5600px] border border-gray-400 rounded-sm">
 				<div className="m-auto">Elevator</div>
 			</div>
-
 			<button
 				ref={triggerEltRef}
 				className="fixed bottom-5 right-5 bg-amber-200 text-amber-800 px-4 py-2 rounded font-bold cursor-pointer hover:shadow-2xl hover:scale-105 transition-all active:scale-95"
