@@ -118,9 +118,11 @@ export const useCursors = (options: UseCursorsOptions) => {
 				new (cursors[cursorEffect] as any)(commonOptions),
 			])
 			.with(P.array(P.string), (cursorEffectConfig) =>
-				// biome-ignore lint/performance/noDynamicNamespaceImportAccess: Necessary here
-				// biome-ignore lint/suspicious/noExplicitAny: I don't know how to type it
-				cursorEffectConfig.map((effect) => new (cursors[effect] as any)()),
+				cursorEffectConfig.map(
+					// biome-ignore lint/performance/noDynamicNamespaceImportAccess: Necessary here
+					// biome-ignore lint/suspicious/noExplicitAny: I don't know how to type it
+					(effect) => new (cursors[effect] as any)(commonOptions),
+				),
 			)
 			.with({ name: P.string, config: P.unknown }, (cursorEffectConfig) => [
 				// biome-ignore lint/performance/noDynamicNamespaceImportAccess: Necessary here

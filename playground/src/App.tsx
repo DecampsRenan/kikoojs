@@ -17,12 +17,17 @@ export function App() {
 	const cursorContainerEltRef = useRef<HTMLDivElement>(null);
 
 	useCursors({
-		enabledCursors: "fairyDustCursor",
+		enabledCursors: [
+			"fairyDustCursor",
+			"followingDotCursor",
+			"trailingCursor",
+			"emojiCursor",
+		],
 		containerElement: cursorContainerEltRef.current,
 	});
 
 	return (
-		<div className="space-y-10 flex flex-col mt-15 max-w-xl m-auto px-8">
+		<div className="space-y-10 flex flex-col mt-15 max-w-160 m-auto px-8">
 			<div className="space-y-0">
 				<div className="flex">
 					<h1 className="text-4xl font-extrabold" ref={titleGlitchRef}>
