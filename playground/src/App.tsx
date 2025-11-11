@@ -4,7 +4,10 @@ import { version } from "../../package.json";
 import { useCursors, useElevator, useGlitch } from "../../src";
 
 export function App() {
-	const glitchRef = useGlitch<HTMLHeadingElement>();
+	const titleGlitchRef = useGlitch<HTMLHeadingElement>({
+		playMode: "hover",
+	});
+	const exampleGlitchRef = useGlitch<HTMLHeadingElement>();
 
 	const { triggerEltRef } = useElevator<HTMLButtonElement>({
 		mainAudio: "/sfx/waiting.mp3",
@@ -19,10 +22,10 @@ export function App() {
 	});
 
 	return (
-		<div className="space-y-10 flex flex-col mt-40 max-w-xl m-auto">
+		<div className="space-y-10 flex flex-col mt-15 max-w-xl m-auto px-8">
 			<div className="space-y-0">
 				<div className="flex">
-					<h1 className="text-4xl font-extrabold" ref={glitchRef}>
+					<h1 className="text-4xl font-extrabold" ref={titleGlitchRef}>
 						KikooJS
 					</h1>
 					<span className="text-sm">v{version}</span>
@@ -42,7 +45,9 @@ export function App() {
 			</div>
 
 			<div className="space-y-0 text-left">
-				<h1 className="text-3xl">✨ Glitch element</h1>
+				<h1 className="text-3xl" ref={exampleGlitchRef}>
+					✨ Glitch element
+				</h1>
 				<span className="text-xs">
 					Powered by{" "}
 					<a

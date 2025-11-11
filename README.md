@@ -1,29 +1,44 @@
-# react-components-starter
+# KikooJS
 
-A starter for creating a React component library.
+> You never asked for it — now it’s real. All the fun libs in one package.
+
+## Getting started
+
+```sh
+npm install kikoojs # yes, simple 😄
+```
+
+## What do you get ?
+
+I strongly recommend to check the [demo website](https://kikoojs.netlify.app).
 
 ## Development
 
 - Install dependencies:
 
 ```bash
-npm install
+bun install
 ```
 
 - Run the playground:
 
 ```bash
-npm run play
+bun run play
 ```
 
 - Run the unit tests:
 
 ```bash
-npm run test
+bun run test
 ```
 
 - Build the library:
 
 ```bash
-npm run build
+bun run build
 ```
+
+
+## TODO
+
+- [ ] Fix initial page load on netlify (elevatorjs not defined)

@@ -24,15 +24,12 @@ export const useExternalScript = (
 
 	const getSrcContent = useCallback(async () => {
 		try {
-			setStatus("loading");
 			const response = await fetch(src);
 			if (!response.ok) {
 				throw new Error("Cannot fetch script");
 			}
 
 			const rawExternalScriptContent = await response.text();
-			setStatus("ready");
-			console.log("Script loaded", rawExternalScriptContent);
 			return rawExternalScriptContent;
 		} catch (errorLoadingScript) {
 			console.log("Error loading script", errorLoadingScript);
@@ -44,21 +41,21 @@ export const useExternalScript = (
 	useLayoutEffect(() => {
 		setStatus("loading");
 		if (cache && cachedScript) {
-			console.log("loaded from cache");
 			scriptRef.current.innerHTML = cachedScript;
 		} else {
 			getSrcContent().then((rawExternalScriptContent) => {
+				console.log("adding script", rawExternalScriptContent);
 				if (!rawExternalScriptContent) return;
 				storage.setItem(`internal-script:${src}`, rawExternalScriptContent);
 				scriptRef.current.innerHTML = rawExternalScriptContent;
+				document.body.appendChild(scriptRef.current);
+				setTimeout(() => setStatus("ready"));
 			});
 		}
 
-		document.body.appendChild(scriptRef.current);
-		setStatus("ready");
 		return () => {
 			// Cleanup
-			document.body.removeChild(scriptRef.current);
+			scriptRef.current?.remove();
 		};
 	}, [src, cachedScript, cache, getSrcContent, storage.setItem]);
 

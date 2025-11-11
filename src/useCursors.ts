@@ -1,5 +1,5 @@
 import * as cursors from "cursor-effects";
-import { useLayoutEffect, useMemo, useState } from "react";
+import { useLayoutEffect, useMemo } from "react";
 import { match, P } from "ts-pattern";
 
 type Cursor =
@@ -135,7 +135,9 @@ export const useCursors = (options: UseCursorsOptions) => {
 			.exhaustive();
 
 		return () => {
-			cursorInstances.forEach((cursor) => cursor.destroy());
+			cursorInstances.forEach((cursor) => {
+				cursor.destroy();
+			});
 		};
 	}, [enabledCursors, commonOptions, containerElement]);
 };
