@@ -113,13 +113,19 @@ export const useCursors = (options: UseCursorsOptions) => {
 		if (containerElement === null) return;
 		const cursorInstances = match(enabledCursors)
 			.with(P.string, (cursorEffect: Cursor) => [
-				new cursors[cursorEffect](commonOptions),
+				// biome-ignore lint/performance/noDynamicNamespaceImportAccess: Necessary here
+				// biome-ignore lint/suspicious/noExplicitAny: I don't know how to type it
+				new (cursors[cursorEffect] as any)(commonOptions),
 			])
 			.with(P.array(P.string), (cursorEffectConfig) =>
-				cursorEffectConfig.map((effect) => new cursors[effect]()),
+				// biome-ignore lint/performance/noDynamicNamespaceImportAccess: Necessary here
+				// biome-ignore lint/suspicious/noExplicitAny: I don't know how to type it
+				cursorEffectConfig.map((effect) => new (cursors[effect] as any)()),
 			)
 			.with({ name: P.string, config: P.unknown }, (cursorEffectConfig) => [
-				new cursors[cursorEffectConfig.name]({
+				// biome-ignore lint/performance/noDynamicNamespaceImportAccess: Necessary here
+				// biome-ignore lint/suspicious/noExplicitAny: I don't know how to type it
+				new (cursors[cursorEffectConfig.name] as any)({
 					...commonOptions,
 					...cursorEffectConfig.config,
 				}),
@@ -129,7 +135,12 @@ export const useCursors = (options: UseCursorsOptions) => {
 				(cursorEffectConfig) =>
 					cursorEffectConfig.map(
 						(effect) =>
-							new cursors[effect.name]({ ...commonOptions, ...effect.config }),
+							// biome-ignore lint/performance/noDynamicNamespaceImportAccess: Necessary here
+							// biome-ignore lint/suspicious/noExplicitAny: I don't know how to type it
+							new (cursors[effect.name] as any)({
+								...commonOptions,
+								...effect.config,
+							}),
 					),
 			)
 			.exhaustive();
