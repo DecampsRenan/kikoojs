@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useExternalScript } from "../useExternalScript";
 
 export const elevatorJsSrc =
@@ -60,14 +60,12 @@ export const useElevator = <
 		"not-loaded",
 	);
 
-	const elevatorRef = useRef<{ elevate: () => void }>(null);
+	const elevatorRef = useRef<Elevator>(null);
 	const triggerEltRef = useRef<TriggerElement>(null);
-
 	const optionsRef = useRef(options);
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		setStatus("loading");
-		console.log({ isReady, elevatorRef });
 		if (!isReady) {
 			return;
 		}
