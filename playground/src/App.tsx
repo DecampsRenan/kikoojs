@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { version } from "../../package.json";
-
 import { useCursors, useElevator, useGlitch } from "../../src";
 
 export function App() {
@@ -103,9 +102,23 @@ export function App() {
 				</span>
 			</div>
 
-			<div className="flex h-[5600px] border border-gray-400 rounded-sm">
-				<div className="m-auto">Elevator</div>
+			<div className="space-y-0 text-left">
+				<div className="flex h-[5600px] border border-gray-400 rounded-sm">
+					<div className="m-auto">Elevator</div>
+				</div>
+				<span className="text-xs">
+					Powered by{" "}
+					<a
+						className="underline underline-offset-2"
+						href="https://github.com/tholman/elevator.js/tree/master"
+						target="_blank"
+						rel="noopener"
+					>
+						ElevatorJS
+					</a>
+				</span>
 			</div>
+
 			<button
 				ref={triggerEltRef}
 				className="fixed bottom-5 right-5 bg-amber-200 text-amber-800 px-4 py-2 rounded font-bold cursor-pointer hover:shadow-2xl hover:scale-105 transition-all active:scale-95"
