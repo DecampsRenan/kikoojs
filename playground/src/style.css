@@ -1,13 +1,20 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: "ARCO";
+    src:
+      /*local("ARCO"),*/
+      url("/fonts/ARCO.ttf") format("truetype"),
+      url("/fonts/ARCO.woff") format("woff"),
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: 'Borel', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.7;
+  vertical-align:middle;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,6 +26,10 @@
   box-sizing: border-box;
 }
 
+code {
+  font-family: 'Reddit Mono Variable', monospace;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -27,9 +38,13 @@ body {
   min-height: 100vh;
 }
 
+h1 {
+  font-family: ARCO, sans-serif;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: #fbfbfb;
   }
 }

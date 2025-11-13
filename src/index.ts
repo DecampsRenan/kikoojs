@@ -1,6 +1,7 @@
 "use client";
 
 export { registerEasterEggCollection } from "./easter-egg-collection";
+export { useAnimationFrame } from "./useAnimationFrame";
 export type { UseCursorsOptions } from "./useCursors";
 export { useCursors } from "./useCursors";
 export type { UseDvdParams } from "./useDvd";

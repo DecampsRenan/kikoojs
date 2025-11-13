@@ -1,12 +1,17 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { version } from "../../package.json";
-import { useCursors, useDvd, useElevator, useGlitch } from "../../src";
+import {
+	useAnimationFrame,
+	useCursors,
+	useDvd,
+	useElevator,
+	useGlitch,
+} from "../../src";
 
 export function App() {
-	const cursorContainerEltRef = useRef<HTMLDivElement>(null);
-
+	const [hasTouchedCorner, setHasTouchedCorner] = useState(false);
 	const [titleRef] = useGlitch<HTMLHeadingElement>({ playMode: "hover" });
-	const [glitchRef] = useGlitch<HTMLHeadingElement>();
+	const rainbowRef = useRef(0);
 
 	const { triggerEltRef } = useElevator<HTMLButtonElement>({
 		mainAudio: "/sfx/waiting.mp3",
@@ -16,21 +21,37 @@ export function App() {
 	useCursors({
 		enabledCursors: [
 			"fairyDustCursor",
-			"followingDotCursor",
 			"trailingCursor",
 			"emojiCursor",
+			"followingDotCursor",
 		],
-		containerElement: cursorContainerEltRef.current,
+		containerElement: document.body,
 	});
 
-	const [fullTitleRef, dvdControls] = useDvd<HTMLDivElement>();
+	const [fullTitleRef, dvdControls] = useDvd<HTMLDivElement>({
+		xSpeed: 500,
+		ySpeed: 500,
+		onCorner: () => {
+			// trigger confettis and shake screen and animate page background
+			setHasTouchedCorner(true);
+		},
+	});
+
+	useAnimationFrame(
+		(dt) => {
+			rainbowRef.current += dt * 0.3;
+			if (rainbowRef.current >= 360) rainbowRef.current = 0;
+			document.body.style.backgroundColor = `hsl(${rainbowRef.current}deg 100% 50%)`;
+		},
+		{ enabled: hasTouchedCorner },
+	);
 
 	return (
-		<div className="space-y-10 flex flex-col mt-15 max-w-160 m-auto px-8">
-			<div className="space-y-0">
+		<div className="space-y-10 flex flex-col max-w-160 mx-auto mb-8 px-8">
+			<div className="flex flex-col items-center gap-8 h-screen pt-20">
 				{/** biome-ignore lint/a11y/useSemanticElements: I want it to be a div */}
 				<div
-					className="flex"
+					className="flex flex-col gap-1 justify-center"
 					ref={fullTitleRef}
 					tabIndex={0}
 					role="button"
@@ -44,22 +65,63 @@ export function App() {
 						dvdControls.start();
 					}}
 				>
-					<h1 className="text-4xl font-extrabold" ref={titleRef}>
+					<h1
+						className={`text-4xl font-extrabold ${dvdControls.isPlaying ? "" : "text-[#ff4894]"}`}
+						ref={titleRef}
+					>
 						KikooJS
 					</h1>
-					<span className="text-sm">v{version}</span>
+					<span
+						className={`text-sm ${dvdControls.isPlaying ? "" : "text-gray-500"}`}
+					>
+						v{version}
+					</span>
 				</div>
-				<span>
-					✨ You never asked for it — now it’s real. All the fun libs in one
-					package ✨
-				</span>
+				<div>
+					<p>
+						You never asked for it, now it’s real. All the fun libs in one
+						package ✨
+					</p>
+				</div>
+
+				<code className="bg-gray-100 rounded px-6 py-4 shadow-inner">
+					npm install kikoojs
+				</code>
+
+				<div>
+					<p>
+						Try typing "hi", "no", "homer", "bravo" or "lol" (there is many
+						more, all options not listed here)
+					</p>
+					<span className="text-xs">
+						Powered by{" "}
+						<a
+							className="underline underline-offset-2"
+							href="https://github.com/WeiChiaChang/easter-egg-collection"
+							target="_blank"
+							rel="noopener"
+						>
+							Easter Eggs Collection
+						</a>
+					</span>
+				</div>
+
+				<div className="flex-1" />
+
+				<div className="my-5">Scroll down ↓</div>
 			</div>
 
-			<div className="self-center font-mono bg-gray-700 rounded px-4 py-2 shadow-inner">
-				&gt; npm install kikoojs
-			</div>
+			<div className="h-1200" />
 
-			<div className="flex">
+			<button
+				ref={triggerEltRef}
+				className="bottom-5 right-5 bg-amber-200 text-amber-800 px-6 pt-4 pb-2 rounded font-bold cursor-pointer hover:shadow-2xl hover:scale-105 transition-all active:scale-95"
+				type="button"
+			>
+				ElevatorJS
+			</button>
+
+			{/* <div className="flex">
 				<h2 className="text-2xl font-bold">What's inside ?</h2>
 			</div>
 
@@ -136,11 +198,11 @@ export function App() {
 
 			<button
 				ref={triggerEltRef}
-				className="fixed bottom-5 right-5 bg-amber-200 text-amber-800 px-4 py-2 rounded font-bold cursor-pointer hover:shadow-2xl hover:scale-105 transition-all active:scale-95"
+				className="fixed bottom-5 right-5 bg-amber-200 text-amber-800 px-6 pt-4 pb-2 rounded font-bold cursor-pointer hover:shadow-2xl hover:scale-105 transition-all active:scale-95"
 				type="button"
 			>
 				ElevatorJS
-			</button>
+			</button> */}
 		</div>
 	);
 }
