@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  cursor-effects:
+    hash: a1a1e689f89190820859392753aa96f20f2762dacb88d9ed83494b47a77b259f
+    path: patches/cursor-effects.patch
+
 importers:
 
   .:
@@ -19,7 +24,7 @@ importers:
         version: 3.0.0(@tsparticles/engine@3.9.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       cursor-effects:
         specifier: 1.0.17
-        version: 1.0.17
+        version: 1.0.17(patch_hash=a1a1e689f89190820859392753aa96f20f2762dacb88d9ed83494b47a77b259f)
       easter-egg-collection:
         specifier: 1.4.56
         version: 1.4.56
@@ -2739,7 +2744,7 @@ snapshots:
 
   csstype@3.1.3: {}
 
-  cursor-effects@1.0.17: {}
+  cursor-effects@1.0.17(patch_hash=a1a1e689f89190820859392753aa96f20f2762dacb88d9ed83494b47a77b259f): {}
 
   debug@4.4.3:
     dependencies:

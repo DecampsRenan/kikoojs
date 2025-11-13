@@ -79,6 +79,9 @@
 			"esbuild",
 			"lefthook",
 			"tsparticles-engine"
-		]
+		],
+		"patchedDependencies": {
+			"cursor-effects": "patches/cursor-effects.patch"
+		}
 	}
 }
