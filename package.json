@@ -1,6 +1,6 @@
 {
 	"name": "kikoojs",
-	"version": "4000.0.1",
+	"version": "4001.0.0",
 	"description": "Collection of useless react components and hooks to have fun",
 	"type": "module",
 	"license": "MIT",
