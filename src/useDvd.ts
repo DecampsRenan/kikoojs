@@ -8,10 +8,29 @@ import {
 
 export type UseDvdParams = {
 	/**
-	 * speed in px/ms
+	 * speed on x axis in px/ms
 	 */
 	xSpeed?: number;
+
+	/**
+	 * speed on y axis in px/ms
+	 */
 	ySpeed?: number;
+
+	/**
+	 * used to compute the color change speed
+	 */
+	variationSpeed?: number;
+
+	/**
+	 * Boolean used to indicate if the color should be animated
+	 */
+	animateColor?: boolean;
+
+	/**
+	 * called when the animated element touch a corner
+	 */
+	onCorner?: () => void;
 };
 
 /**
@@ -21,9 +40,7 @@ export type UseDvdParams = {
  * const controls = useDvd(elementRef);
  *
  * controls.play()
- * controls.pause()
  * controls.stop()
- * controls.reset()
  */
 export const useDvd = <ElementRef extends HTMLElement = HTMLElement>(
 	params?: UseDvdParams,
@@ -31,7 +48,13 @@ export const useDvd = <ElementRef extends HTMLElement = HTMLElement>(
 	const elementRef = useRef<ElementRef>(null);
 	const [status, setStatus] = useState<"stop" | "play">("stop");
 
-	const { xSpeed = 100, ySpeed = 100 } = params ?? {};
+	const {
+		xSpeed = 100,
+		ySpeed = 100,
+		variationSpeed = 200,
+		animateColor = true,
+		onCorner,
+	} = params ?? {};
 
 	const animationFrameId = useRef<number>(-1);
 	const windowSize = useRef({
@@ -55,6 +78,7 @@ export const useDvd = <ElementRef extends HTMLElement = HTMLElement>(
 	const initialElementPosition = useRef(getXYPosition());
 	const currentPosition = useRef(initialElementPosition.current);
 	const currentVelocity = useRef({ vx: xSpeed, vy: ySpeed });
+	const currentColor = useRef(0);
 
 	// Update window size if the browser window is resized
 	useEffect(() => {
@@ -78,6 +102,9 @@ export const useDvd = <ElementRef extends HTMLElement = HTMLElement>(
 	const lastTime = useRef(0);
 
 	const runAnimation = useEffectEvent((timestamp: number) => {
+		let hasTouchedX = false;
+		let hasTouchedY = false;
+
 		if (lastTime.current === 0) lastTime.current = timestamp;
 		const deltaTime = (timestamp - lastTime.current) / 1000;
 		lastTime.current = timestamp;
@@ -92,33 +119,54 @@ export const useDvd = <ElementRef extends HTMLElement = HTMLElement>(
 		elementPos.x += velocity.vx * deltaTime;
 		elementPos.y += velocity.vy * deltaTime;
 
+		if (animateColor) {
+			currentColor.current += variationSpeed * deltaTime;
+		}
+
 		const screenX = initialElementPosition.current.x + elementPos.x;
 		const screenY = initialElementPosition.current.y + elementPos.y;
 
+		if (currentColor.current > 360) {
+			currentColor.current = 0;
+		}
+
 		// Checks boundaries
 		if (screenX + elementPos.width > viewport.width) {
+			hasTouchedX = true;
 			velocity.vx = -velocity.vx;
 			elementPos.x =
 				viewport.width - elementPos.width - initialElementPosition.current.x;
 		}
 
 		if (screenX < 0) {
+			hasTouchedX = true;
 			velocity.vx = -velocity.vx;
 			elementPos.x = -initialElementPosition.current.x;
 		}
 
 		if (screenY + elementPos.height > viewport.height) {
+			hasTouchedY = true;
 			velocity.vy = -velocity.vy;
 			elementPos.y =
 				viewport.height - initialElementPosition.current.y - elementPos.height;
 		}
 
 		if (screenY < 0) {
+			hasTouchedY = true;
 			velocity.vy = -velocity.vy;
 			elementPos.y = -initialElementPosition.current.y;
 		}
 
 		elementRef.current.style.translate = `${elementPos.x}px ${elementPos.y}px`;
+
+		if (animateColor) {
+			elementRef.current.style.color = `hsl(${currentColor.current}deg 100% 50%)`;
+		}
+
+		if (hasTouchedX && hasTouchedY) {
+			onCorner?.();
+		}
+
 		animationFrameId.current = requestAnimationFrame(runAnimation);
 	});
 
@@ -130,6 +178,9 @@ export const useDvd = <ElementRef extends HTMLElement = HTMLElement>(
 		elementRef.current.style.margin = "0";
 		elementRef.current.style.padding = "0";
 		elementRef.current.style.zIndex = "9999";
+		if (animateColor) {
+			elementRef.current.style.color = "hsl(0 100% 50%)";
+		}
 
 		initialElementPosition.current = getXYPosition();
 		currentPosition.current = {
@@ -139,7 +190,7 @@ export const useDvd = <ElementRef extends HTMLElement = HTMLElement>(
 		};
 
 		animationFrameId.current = requestAnimationFrame(runAnimation);
-	}, [getXYPosition]);
+	}, [getXYPosition, animateColor]);
 
 	return [
 		elementRef,

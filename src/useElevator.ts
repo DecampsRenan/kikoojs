@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useExternalScript } from "../useExternalScript";
+import { useExternalScript } from "./useExternalScript";
 
 export const elevatorJsSrc =
 	"https://cdnjs.cloudflare.com/ajax/libs/elevator.js/1.0.1/elevator.min.js";
