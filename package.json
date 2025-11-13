@@ -21,7 +21,8 @@
 	"types": "./dist/index.d.ts",
 	"exports": {
 		".": "./dist/index.js",
-		"./package.json": "./package.json"
+		"./package.json": "./package.json",
+		"./register-easter-egg-collection": "./dist/easter-egg-collection-register"
 	},
 	"publishConfig": {
 		"access": "public"

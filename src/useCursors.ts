@@ -91,12 +91,16 @@ type CursorConfig =
 			};
 	  };
 
-export type UseCursorsOptions = {
+export type UseCursorsOptions<
+	ContainerElement extends HTMLElement = HTMLElement,
+> = {
 	enabledCursors: Cursor | Array<Cursor> | CursorConfig | Array<CursorConfig>;
-	containerElement?: HTMLElement | null;
+	containerElement?: ContainerElement | null;
 };
 
-export const useCursors = (options: UseCursorsOptions) => {
+export const useCursors = <ContainerElement extends HTMLElement = HTMLElement>(
+	options: UseCursorsOptions<ContainerElement>,
+) => {
 	const { enabledCursors, containerElement = document.body } = useMemo(
 		() => options ?? {},
 		[options],

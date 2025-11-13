@@ -1,31 +1,37 @@
 import {
 	type GlitchableElement,
 	type GlitchPartialOptions,
+	type GlitchResult,
 	PowerGlitch,
 } from "powerglitch";
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export type UseGlitchOptions = GlitchPartialOptions;
 
 /**
  * React version of powerglitch lib (cf. https://github.com/7PH/powerglitch)
  * @param options powerglitch options
- * @returns Ref you can link to the element you want to glitch
  */
 export const useGlitch = <ElementRef extends GlitchableElement>(
 	options?: UseGlitchOptions,
 ) => {
 	const glitchEltRef = useRef<ElementRef>(null);
+	const controls = useRef<GlitchResult>(null);
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		if (!glitchEltRef.current) return;
-		PowerGlitch.glitch(glitchEltRef.current, {
+		controls.current = PowerGlitch.glitch(glitchEltRef.current, {
+			...options,
 			timing: {
 				easing: "ease-in-out",
+				...options?.timing,
 			},
-			...options,
 		});
+
+		return () => {
+			controls.current?.stopGlitch();
+		};
 	}, [options]);
 
-	return glitchEltRef;
+	return [glitchEltRef, controls.current] as const;
 };

@@ -1,19 +1,17 @@
 import { useRef } from "react";
 import { version } from "../../package.json";
-import { useCursors, useElevator, useGlitch } from "../../src";
+import { useCursors, useDvd, useElevator, useGlitch } from "../../src";
 
 export function App() {
-	const titleGlitchRef = useGlitch<HTMLHeadingElement>({
-		playMode: "hover",
-	});
-	const exampleGlitchRef = useGlitch<HTMLHeadingElement>();
+	const cursorContainerEltRef = useRef<HTMLDivElement>(null);
+
+	const [titleRef] = useGlitch<HTMLHeadingElement>({ playMode: "hover" });
+	const [glitchRef] = useGlitch<HTMLHeadingElement>();
 
 	const { triggerEltRef } = useElevator<HTMLButtonElement>({
 		mainAudio: "/sfx/waiting.mp3",
 		endAudio: "/sfx/ding.mp3",
 	});
-
-	const cursorContainerEltRef = useRef<HTMLDivElement>(null);
 
 	useCursors({
 		enabledCursors: [
@@ -25,11 +23,27 @@ export function App() {
 		containerElement: cursorContainerEltRef.current,
 	});
 
+	const [fullTitleRef, dvdControls] = useDvd<HTMLDivElement>();
+
 	return (
 		<div className="space-y-10 flex flex-col mt-15 max-w-160 m-auto px-8">
 			<div className="space-y-0">
-				<div className="flex">
-					<h1 className="text-4xl font-extrabold" ref={titleGlitchRef}>
+				<div
+					className="flex"
+					ref={fullTitleRef}
+					tabIndex={0}
+					role="button"
+					onKeyDown={(event) => {
+						if (!["Enter", " "].includes(event.key)) return;
+						if (dvdControls.isPlaying) return;
+						dvdControls.start();
+					}}
+					onClick={() => {
+						if (dvdControls.isPlaying) return;
+						dvdControls.start();
+					}}
+				>
+					<h1 className="text-4xl font-extrabold" ref={titleRef}>
 						KikooJS
 					</h1>
 					<span className="text-sm">v{version}</span>
@@ -40,7 +54,7 @@ export function App() {
 				</span>
 			</div>
 
-			<div className=" self-center font-mono bg-gray-700 rounded px-4 py-2 shadow-inner">
+			<div className="self-center font-mono bg-gray-700 rounded px-4 py-2 shadow-inner">
 				&gt; npm install kikoojs
 			</div>
 
@@ -49,7 +63,7 @@ export function App() {
 			</div>
 
 			<div className="space-y-0 text-left">
-				<h1 className="text-3xl" ref={exampleGlitchRef}>
+				<h1 className="text-3xl" ref={glitchRef}>
 					✨ Glitch element
 				</h1>
 				<span className="text-xs">
