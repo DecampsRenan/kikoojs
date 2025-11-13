@@ -28,6 +28,7 @@ export function App() {
 	return (
 		<div className="space-y-10 flex flex-col mt-15 max-w-160 m-auto px-8">
 			<div className="space-y-0">
+				{/** biome-ignore lint/a11y/useSemanticElements: I want it to be a div */}
 				<div
 					className="flex"
 					ref={fullTitleRef}
