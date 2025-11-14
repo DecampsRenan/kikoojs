@@ -1,30 +1,25 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { version } from "../../package.json";
 import {
-	useAnimationFrame,
 	useCursors,
 	useDvd,
 	useElevator,
 	useGlitch,
+	useKonamiCode,
+	useRainbow,
 } from "../../src";
 
 export function App() {
 	const [hasTouchedCorner, setHasTouchedCorner] = useState(false);
 	const [titleRef] = useGlitch<HTMLHeadingElement>({ playMode: "hover" });
-	const rainbowRef = useRef(0);
 
-	const { triggerEltRef } = useElevator<HTMLButtonElement>({
+	const [triggerEltRef] = useElevator<HTMLButtonElement>({
 		mainAudio: "/sfx/waiting.mp3",
 		endAudio: "/sfx/ding.mp3",
 	});
 
 	useCursors({
-		enabledCursors: [
-			"fairyDustCursor",
-			"trailingCursor",
-			"emojiCursor",
-			"followingDotCursor",
-		],
+		enabledCursors: ["fairyDustCursor", "trailingCursor", "emojiCursor"],
 		containerElement: document.body,
 	});
 
@@ -37,17 +32,14 @@ export function App() {
 		},
 	});
 
-	useAnimationFrame(
-		(dt) => {
-			rainbowRef.current += dt * 0.3;
-			if (rainbowRef.current >= 360) rainbowRef.current = 0;
-			document.body.style.backgroundColor = `hsl(${rainbowRef.current}deg 100% 50%)`;
-		},
-		{ enabled: hasTouchedCorner },
-	);
+	useRainbow<HTMLDivElement>({ enabled: hasTouchedCorner });
+
+	useKonamiCode({
+		onSuccess: () => setHasTouchedCorner(true),
+	});
 
 	return (
-		<div className="space-y-10 flex flex-col max-w-160 mx-auto mb-8 px-8">
+		<div className="space-y-10 flex flex-col max-w-150 mx-auto mb-8 px-8">
 			<div className="flex flex-col items-center gap-8 h-screen pt-20">
 				{/** biome-ignore lint/a11y/useSemanticElements: I want it to be a div */}
 				<div
@@ -66,7 +58,7 @@ export function App() {
 					}}
 				>
 					<h1
-						className={`text-4xl font-extrabold ${dvdControls.isPlaying ? "" : "text-[#ff4894]"}`}
+						className={`text-4xl md:text-5xl lg:text-7xl font-extrabold ${dvdControls.isPlaying ? "" : "text-[#ff4894]"}`}
 						ref={titleRef}
 					>
 						KikooJS
@@ -108,7 +100,7 @@ export function App() {
 
 				<div className="flex-1" />
 
-				<div className="my-5">Scroll down ↓</div>
+				<div className="my-5">↓ Scroll down ↓</div>
 			</div>
 
 			<div className="h-1200" />
