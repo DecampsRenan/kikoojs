@@ -1,5 +1,5 @@
 import { version } from "../../package.json";
-import { Title } from "./Title";
+import { Title } from "./components/Title";
 
 export function App() {
 	// 1. Add nice fonts and colors

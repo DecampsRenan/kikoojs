@@ -2,10 +2,10 @@
 
 @font-face {
     font-family: "ARCO";
-    src: 
+    /* src: 
       local("ARCO"),
       url("/fonts/ARCO.ttf") format("truetype"),
-      url("/fonts/ARCO.woff") format("woff"),
+      url("/fonts/ARCO.woff") format("woff"), */
 }
 
 :root {
