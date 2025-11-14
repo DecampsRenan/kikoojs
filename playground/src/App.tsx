@@ -2,19 +2,21 @@ import { version } from "../../package.json";
 import { Title } from "./Title";
 
 export function App() {
-	// Glitch the title
+	// 1. Add nice fonts and colors
 
-	// Dvd Bounce
+	// 2. Glitch the title
 
-	// Elevator
+	// 3. Elevator - en prévoyance du contenu
 
-	// Easter eggs
+	// 4. Easter eggs
 
-	// Add fancy cursor effects
+	// 5. Add fancy cursor effects
 
-	// On dvd corner bounce, animate background
+	// 6. Dvd Bounce
 
-	// Oh crap, I don't have time to wait => konami code to trigger background
+	// 7. On dvd corner bounce, animate background
+
+	// 8. Oh crap, I don't have time to wait => konami code to trigger background
 
 	return (
 		<div className="space-y-10 flex flex-col max-w-150 mx-auto mb-8 px-8">

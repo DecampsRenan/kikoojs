@@ -2,32 +2,31 @@
 
 @font-face {
     font-family: "ARCO";
-    /* src: */
-      /*local("ARCO"),*/
-      /* url("/fonts/ARCO.ttf") format("truetype"), */
-      /* url("/fonts/ARCO.woff") format("woff"), */
+    src: 
+      local("ARCO"),
+      url("/fonts/ARCO.ttf") format("truetype"),
+      url("/fonts/ARCO.woff") format("woff"),
 }
 
 :root {
   /* font-family: 'Borel', system-ui, Avenir, Helvetica, Arial, sans-serif; */
-  /* line-height: 1.7; */
+  line-height: 1.7;
   font-weight: 400;
 
-  color: #242424;
+  color: #464343;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --title-color: #ff4894;
 }
 
 * {
   box-sizing: border-box;
 }
 
-/* code {
-  font-family: 'Reddit Mono Variable', monospace;
-} */
 
 body {
   margin: 0;
@@ -37,9 +36,13 @@ body {
   min-height: 100vh;
 }
 
-/* h1 {
-  font-family: ARCO, sans-serif;
-} */
+code {
+  /* font-family: 'Reddit Mono Variable', monospace; */
+}
+
+h1 {
+  /* font-family: ARCO, sans-serif; */
+}
 
 @media (prefers-color-scheme: light) {
   :root {
