@@ -108,7 +108,7 @@ export function App() {
 
 				<div className="flex-1" />
 
-				<div className="my-5">Scroll down ↓</div>
+				<div className="my-5">↓ Scroll down ↓</div>
 			</div>
 
 			<div className="h-1200" />
