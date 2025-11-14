@@ -33,7 +33,7 @@ export const useKonamiCode = (params: UseKonamiCodeOptions) => {
 
 				// If the next character to type is correct, increment the cursor
 				// else, reset to 0.
-				if (event.key && nextValidCharCode) {
+				if (event.key === nextValidCharCode) {
 					nextCharCodeIndexRef.current += 1;
 				} else {
 					nextCharCodeIndexRef.current = 0;
