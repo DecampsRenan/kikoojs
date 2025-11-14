@@ -2,16 +2,15 @@
 
 @font-face {
     font-family: "ARCO";
-    src:
+    /* src: */
       /*local("ARCO"),*/
-      url("/fonts/ARCO.ttf") format("truetype"),
-      url("/fonts/ARCO.woff") format("woff"),
+      /* url("/fonts/ARCO.ttf") format("truetype"), */
+      /* url("/fonts/ARCO.woff") format("woff"), */
 }
 
 :root {
-  font-family: 'Borel', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.7;
-  vertical-align:middle;
+  /* font-family: 'Borel', system-ui, Avenir, Helvetica, Arial, sans-serif; */
+  /* line-height: 1.7; */
   font-weight: 400;
 
   color: #242424;
@@ -26,9 +25,9 @@
   box-sizing: border-box;
 }
 
-code {
+/* code {
   font-family: 'Reddit Mono Variable', monospace;
-}
+} */
 
 body {
   margin: 0;
@@ -38,9 +37,9 @@ body {
   min-height: 100vh;
 }
 
-h1 {
+/* h1 {
   font-family: ARCO, sans-serif;
-}
+} */
 
 @media (prefers-color-scheme: light) {
   :root {
