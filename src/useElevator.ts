@@ -50,10 +50,10 @@ export type UseElevatorOptions<
 };
 
 export const useElevator = <
-	TriggerElement extends Element = Element,
+	TriggerElementRef extends Element = Element,
 	TargetElement extends Element = Element,
 >(
-	options?: UseElevatorOptions<TriggerElement, TargetElement>,
+	options?: UseElevatorOptions<TriggerElementRef, TargetElement>,
 ) => {
 	const { isReady } = useExternalScript(elevatorJsSrc);
 	const [status, setStatus] = useState<"not-loaded" | "loading" | "ready">(
@@ -61,16 +61,16 @@ export const useElevator = <
 	);
 
 	const elevatorRef = useRef<Elevator>(null);
-	const triggerEltRef = useRef<TriggerElement>(null);
+	const triggerEltRef = useRef<TriggerElementRef>(null);
 	const optionsRef = useRef(options);
 
 	useEffect(() => {
 		setStatus("loading");
-		if (!isReady) {
+		if (!isReady || !triggerEltRef.current) {
 			return;
 		}
 
-		elevatorRef.current = new Elevator<TriggerElement, TargetElement>({
+		elevatorRef.current = new Elevator<TriggerElementRef, TargetElement>({
 			element: triggerEltRef.current ?? undefined,
 			...optionsRef.current,
 		});
@@ -78,12 +78,14 @@ export const useElevator = <
 		setStatus("ready");
 	}, [isReady]);
 
-	return {
-		isReady: status === "ready",
-		isLoading: status === "loading",
-		elevator: elevatorRef.current,
+	return [
 		triggerEltRef,
-	};
+		{
+			isReady: status === "ready",
+			isLoading: status === "loading",
+			elevator: elevatorRef.current,
+		},
+	] as const;
 };
 
 declare global {

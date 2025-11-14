@@ -12,3 +12,7 @@ export type { UseExternalScriptParams } from "./useExternalScript";
 export { useExternalScript } from "./useExternalScript";
 export type { UseGlitchOptions } from "./useGlitch";
 export { useGlitch } from "./useGlitch";
+export type { UseKonamiCodeOptions } from "./useKonamiCode";
+export { useKonamiCode } from "./useKonamiCode";
+export type { UseRainbowParams } from "./useRainbow";
+export { useRainbow } from "./useRainbow";

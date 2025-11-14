@@ -20,6 +20,7 @@ I strongly recommend to check the [demo website](https://kikoojs.netlify.app).
 - ↖ [90's cursor effects](https://github.com/tholman/cursor-effects)
 - 📀 DVD Screensaver effect
 - ✨ [Power Glitch Effect](https://github.com/7PH/powerglitch)
+- 🎮 Konami Code
 
 ### `useElevator()`
 
@@ -47,7 +48,14 @@ const MyPage = () => {
 
 ### `useGlitch()`
 
+### `useRainbow()`
+
+### `useKonamiCode()`
+
 ### Utilities
+
+- `useExternalScript()`: Frankly, I don't now how it is working 😅
+- `useAnimationFrame()`: Inspired by CSS Tricks (or Wes Bos ?) - I added controls on it. 
 
 ## Development
 
