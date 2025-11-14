@@ -1,6 +1,6 @@
 
 <center>
-  <img src="./docs/logo.png" alt="KikooJS logo>
+  <img src="./docs/logo.png" alt="KikooJS logo" />
 </center>
 
 
