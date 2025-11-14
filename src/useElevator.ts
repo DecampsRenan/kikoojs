@@ -66,7 +66,7 @@ export const useElevator = <
 
 	useEffect(() => {
 		setStatus("loading");
-		if (!isReady || !triggerEltRef.current) {
+		if (!isReady || !triggerEltRef.current || !!elevatorRef.current) {
 			return;
 		}
 
