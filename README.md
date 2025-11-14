@@ -1,4 +1,9 @@
-# KikooJS
+
+<center>
+  <img src="./docs/logo.png" alt="KikooJS logo>
+</center>
+
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/39933494-361b-42f0-83a8-c9f33c6b3bba/deploy-status)](https://app.netlify.com/projects/kikoojs/deploys)
 
 > You never asked for it, now it’s real. All the fun libs in one package.
