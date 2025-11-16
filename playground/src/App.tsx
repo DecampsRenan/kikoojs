@@ -1,8 +1,6 @@
 import { version } from "../../package.json";
 import { Title } from "./components/Title";
 
-// - désactiver l'ia
-// - voir si le son fonctionne
 // - voir pour vidéo minute kikoojs
 
 export function App() {

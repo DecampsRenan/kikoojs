@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 @font-face {
-    font-family: "ARCO";
+    /* font-family: "ARCO";
     src: 
       local("ARCO"),
       url("/fonts/ARCO.ttf") format("truetype"),
-      url("/fonts/ARCO.woff") format("woff"),
+      url("/fonts/ARCO.woff") format("woff"), */
 }
 
 :root {
-  font-family: 'Borel', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: 'Borel', system-ui, Avenir, Helvetica, Arial, sans-serif; */
   line-height: 1.7;
   font-weight: 400;
 
@@ -37,11 +37,11 @@ body {
 }
 
 code {
-  font-family: 'Reddit Mono Variable', monospace;
+  /* font-family: 'Reddit Mono Variable', monospace; */
 }
 
 h1 {
-  font-family: ARCO, sans-serif;
+  /* font-family: ARCO, sans-serif; */
 }
 
 @media (prefers-color-scheme: light) {
