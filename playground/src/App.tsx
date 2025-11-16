@@ -1,28 +1,70 @@
+import { useState } from "react";
 import { version } from "../../package.json";
+import {
+	useCursors,
+	useDvd,
+	useElevator,
+	useGlitch,
+	useKonamiCode,
+	useRainbow,
+} from "../../src";
 import { Title } from "./components/Title";
 
+// - désactiver l'ia
+// - voir si le son fonctionne
+// - voir pour vidéo minute kikoo
+
 export function App() {
-	// 1. Add nice fonts and colors
+	const [hasTouchedCorner, screenSetHasTouchedCorner] = useState(false);
+	const [titleRef] = useGlitch<HTMLDivElement>({
+		playMode: "hover",
+	});
 
-	// 2. Glitch the title
+	const [triggerElevatorRef] = useElevator<HTMLButtonElement>({
+		mainAudio: "../sfx/wainting.mp3",
+		endAudio: "../sfx/ding.mp3",
+	});
 
-	// 3. Elevator - en prévoyance du contenu
+	useCursors({
+		enabledCursors: [
+			"trailingCursor",
+			"bubbleCursor",
+			"emojiCursor",
+			"characterCursor",
+		],
+	});
 
-	// 4. Easter eggs
+	const [dvdRef, { start }] = useDvd<HTMLDivElement>({
+		xSpeed: 500,
+		ySpeed: 500,
+		onCorner: () => {
+			screenSetHasTouchedCorner(true);
+		},
+	});
 
-	// 5. Add fancy cursor effects
+	useKonamiCode({
+		onSuccess: () => {
+			screenSetHasTouchedCorner(true);
+		},
+	});
 
-	// 6. Dvd Bounce
-
-	// 7. On dvd corner bounce, animate background
-
-	// 8. Oh crap, I don't have time to wait => konami code to trigger background
+	useRainbow({
+		element: document.body,
+		enabled: hasTouchedCorner,
+	});
 
 	return (
 		<div className="space-y-10 flex flex-col max-w-150 mx-auto mb-8 px-8">
 			<div className="flex flex-col items-center gap-8 h-screen pt-20">
-				<Title className="flex flex-col gap-1 justify-center">
-					<h1 className={`text-4xl md:text-5xl lg:text-7xl font-extrabold`}>
+				<Title
+					ref={dvdRef}
+					onClick={() => start()}
+					className="flex flex-col gap-1 justify-center"
+				>
+					<h1
+						ref={titleRef}
+						className={`text-4xl md:text-5xl lg:text-7xl font-extrabold text-(--title-color)`}
+					>
 						KikooJS
 					</h1>
 					<span className={`text-sm`}>v{version}</span>
@@ -36,6 +78,12 @@ export function App() {
 					npm install kikoojs
 				</code>
 			</div>
+
+			<div className="h-1200" />
+
+			<button ref={triggerElevatorRef} type="button">
+				Go to top
+			</button>
 		</div>
 	);
 }

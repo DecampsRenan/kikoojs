@@ -10,6 +10,7 @@ export const Title = ({
 			tabIndex={0}
 			role="button"
 			{...props}
+			onClick={() => onClick?.()}
 			onKeyDown={(event) => {
 				if (!["Enter", " "].includes(event.key)) return;
 				props?.onKeyDown?.(event);
