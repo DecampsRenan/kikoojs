@@ -12,7 +12,8 @@ export type UseGlitchOptions = GlitchPartialOptions;
  * React version of powerglitch lib (cf. https://github.com/7PH/powerglitch)
  * @param options powerglitch options
  */
-export const useGlitch = <ElementRef extends GlitchableElement>(
+// biome-ignore lint/suspicious/noExplicitAny: I need it here
+export const useGlitch = <ElementRef extends GlitchableElement = any>(
 	options?: UseGlitchOptions,
 ) => {
 	const glitchEltRef = useRef<ElementRef>(null);

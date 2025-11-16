@@ -5,8 +5,8 @@ export const elevatorJsSrc =
 	"https://cdnjs.cloudflare.com/ajax/libs/elevator.js/1.0.1/elevator.min.js";
 
 export type UseElevatorOptions<
-	TriggerElement extends Element = Element,
-	TargetElement extends Element = Element,
+	TriggerElement extends HTMLElement = HTMLElement,
+	TargetElement extends HTMLElement = HTMLElement,
 > = {
 	/**
 	 * Music played while the page is scrolling
@@ -50,8 +50,10 @@ export type UseElevatorOptions<
 };
 
 export const useElevator = <
-	TriggerElementRef extends Element = Element,
-	TargetElement extends Element = Element,
+	// biome-ignore lint/suspicious/noExplicitAny: I need it here
+	TriggerElementRef extends HTMLElement = any,
+	// biome-ignore lint/suspicious/noExplicitAny: I need it here
+	TargetElement extends HTMLElement = any,
 >(
 	options?: UseElevatorOptions<TriggerElementRef, TargetElement>,
 ) => {
@@ -90,8 +92,8 @@ export const useElevator = <
 
 declare global {
 	class Elevator<
-		TriggerElement extends Element = Element,
-		TargetElement extends Element = Element,
+		TriggerElement extends HTMLElement = HTMLElement,
+		TargetElement extends HTMLElement = HTMLElement,
 	> {
 		constructor(params?: UseElevatorOptions<TriggerElement, TargetElement>);
 		elevate(): void;

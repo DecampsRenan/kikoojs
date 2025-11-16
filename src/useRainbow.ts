@@ -8,7 +8,8 @@ export type UseRainbowParams<TargetElement extends HTMLElement = HTMLElement> =
 		speed?: number;
 	};
 
-export const useRainbow = <ElementRef extends HTMLElement = HTMLElement>(
+// biome-ignore lint/suspicious/noExplicitAny: I need it here
+export const useRainbow = <ElementRef extends HTMLElement = any>(
 	params?: UseRainbowParams<ElementRef>,
 ) => {
 	const { enabled = true, element, speed = 0.3 } = params ?? {};

@@ -98,7 +98,8 @@ export type UseCursorsOptions<
 	containerElement?: ContainerElement | null;
 };
 
-export const useCursors = <ContainerElement extends HTMLElement = HTMLElement>(
+// biome-ignore lint/suspicious/noExplicitAny: I need it here
+export const useCursors = <ContainerElement extends HTMLElement = any>(
 	options: UseCursorsOptions<ContainerElement>,
 ) => {
 	const { enabledCursors, containerElement = document.body } = useMemo(

@@ -42,7 +42,8 @@ export type UseDvdParams = {
  * controls.play()
  * controls.stop()
  */
-export const useDvd = <ElementRef extends HTMLElement = HTMLElement>(
+// biome-ignore lint/suspicious/noExplicitAny: I need it here
+export const useDvd = <ElementRef extends HTMLElement = any>(
 	params?: UseDvdParams,
 ) => {
 	const elementRef = useRef<ElementRef>(null);
