@@ -49,8 +49,8 @@ export const useDvd = <ElementRef extends HTMLElement = HTMLElement>(
 	const [status, setStatus] = useState<"stop" | "play">("stop");
 
 	const {
-		xSpeed = 100,
-		ySpeed = 100,
+		xSpeed = 300,
+		ySpeed = 300,
 		variationSpeed = 200,
 		animateColor = false,
 		onCorner,

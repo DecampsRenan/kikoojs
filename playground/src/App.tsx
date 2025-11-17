@@ -88,22 +88,12 @@ export function App() {
 
 					<Code lang="sh">npm install kikoojs</Code>
 
-					<div>
+					<div className="max-w-150 mt-5">
 						<p>
-							Try typing "hi", "no", "homer", "bravo" or "lol" (there is many
-							more, all options not listed here)
+							Try typing "hi", click the title, take the elevator! This lib has
+							many <span className="line-through">useless</span> fun things to
+							offer!
 						</p>
-						<span className="text-xs">
-							Powered by{" "}
-							<a
-								className="underline underline-offset-2"
-								href="https://github.com/WeiChiaChang/easter-egg-collection"
-								target="_blank"
-								rel="noopener"
-							>
-								Easter Eggs Collection
-							</a>
-						</span>
 					</div>
 
 					<div className="flex-1" />
@@ -133,6 +123,17 @@ register();
 // Now you can type "bravo", "lol", etc... and it just works™
 `}
 						</Code>
+						<span className="text-xs">
+							Powered by{" "}
+							<a
+								className="underline underline-offset-2"
+								href="https://github.com/WeiChiaChang/easter-egg-collection"
+								target="_blank"
+								rel="noopener"
+							>
+								Easter Eggs Collection
+							</a>
+						</span>
 					</Section>
 
 					<Section label="useCursor()">
@@ -184,6 +185,17 @@ const MyPage = () => {
   );
 }`}
 						</Code>
+						<span className="text-xs">
+							Powered by{" "}
+							<a
+								className="underline underline-offset-2"
+								href="https://github.com/tholman/cursor-effects"
+								target="_blank"
+								rel="noopener"
+							>
+								90's Cursor Effects
+							</a>
+						</span>
 					</Section>
 
 					<Section label="useDvd()">
@@ -213,6 +225,7 @@ export const MyPage = () => {
   );
 }`}
 						</Code>
+						<span className="text-xs">Homemade™</span>
 					</Section>
 
 					<Section label="useElevator()">
@@ -247,6 +260,17 @@ export const MyPage = () => {
   );
 }`}
 						</Code>
+						<span className="text-xs">
+							Powered by{" "}
+							<a
+								className="underline underline-offset-2"
+								href="https://github.com/tholman/elevator.js"
+								target="_blank"
+								rel="noopener"
+							>
+								Elevator.js
+							</a>
+						</span>
 					</Section>
 
 					<Section label="useGlitch()">
@@ -274,6 +298,17 @@ export const MyPage = () => {
 }
 `}
 						</Code>
+						<span className="text-xs">
+							Powered by{" "}
+							<a
+								className="underline underline-offset-2"
+								href="https://github.com/7ph/powerglitch"
+								target="_blank"
+								rel="noopener"
+							>
+								PowerGlitch
+							</a>
+						</span>
 					</Section>
 
 					<Section label="useKonamiCode()">
@@ -295,11 +330,12 @@ export const MyPage = () => {
   useKonamiCode({
     customCodeSequence: ['k', 'i', 'k', 'o', 'o', 'j', 's'],
     onSuccess: () => {
-      // Callback called if the 'kikoojs' is correctly typed!
+      // Callback called if 'kikoojs' is correctly typed!
     }
   });
 }`}
 						</Code>
+						<span className="text-xs">Homemade™</span>
 					</Section>
 
 					<Section label="useRainbow()">
@@ -321,6 +357,7 @@ export const MyPage = () => {
   });
 }`}
 						</Code>
+						<span className="text-xs">Homemade™</span>
 					</Section>
 				</div>
 
@@ -329,7 +366,7 @@ export const MyPage = () => {
 					className="bottom-5 right-5 bg-amber-200 text-amber-800 px-6 pt-4 pb-2 rounded font-bold cursor-pointer hover:shadow-2xl hover:scale-105 transition-all active:scale-95"
 					type="button"
 				>
-					ElevatorJS
+					↑ Go to top ↑
 				</button>
 			</div>
 		</>
