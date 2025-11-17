@@ -32,8 +32,7 @@ export function App() {
 	});
 
 	const [fullTitleRef, dvdControls] = useDvd<HTMLDivElement>({
-		xSpeed: 500,
-		ySpeed: 500,
+		animateColor: true,
 		onCorner: () => {
 			// trigger confettis and shake screen and animate page background
 			setHasTouchedCorner(true);
