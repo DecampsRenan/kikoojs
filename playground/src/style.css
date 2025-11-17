@@ -8,6 +8,15 @@
       url("/fonts/ARCO.woff") format("woff"),
 }
 
+@font-face {
+    font-family: "Koomic Mono";
+    src:
+      url("/fonts/KoomikMono.otf") format("otf"),
+      url("/fonts/KoomikMono.ttf") format("truetype"),
+      url("/fonts/KoomikMono.woff") format("woff"),
+      url("/fonts/KoomikMono.woff2") format("woff2"),
+}
+
 :root {
   font-family: 'Borel', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.7;
@@ -20,6 +29,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --title-color: #ff4894;
 }
 
 * {
@@ -27,7 +38,9 @@
 }
 
 code {
-  font-family: 'Reddit Mono Variable', monospace;
+  font-family: 'Koomic Mono', monospace;
+  font-size: 1em;
+  line-height: .7;
 }
 
 body {
@@ -38,8 +51,13 @@ body {
   min-height: 100vh;
 }
 
-h1 {
+h1, h2, h3 {
   font-family: ARCO, sans-serif;
+  color: var(--title-color);
+}
+
+h2, h3 {
+  font-size: 1.5em;
 }
 
 @media (prefers-color-scheme: light) {

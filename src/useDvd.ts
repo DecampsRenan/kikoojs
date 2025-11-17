@@ -52,7 +52,7 @@ export const useDvd = <ElementRef extends HTMLElement = HTMLElement>(
 		xSpeed = 100,
 		ySpeed = 100,
 		variationSpeed = 200,
-		animateColor = true,
+		animateColor = false,
 		onCorner,
 	} = params ?? {};
 

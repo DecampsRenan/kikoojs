@@ -1,5 +1,5 @@
 import "@fontsource/borel";
-import "@fontsource-variable/reddit-mono";
+import "@fontsource/unifontex";
 
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
