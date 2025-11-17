@@ -10,15 +10,20 @@ import {
 	useRainbow,
 } from "../../src";
 import { Code } from "./components/code";
+import { DancingDuck } from "./components/dancing-duck";
 import { Section } from "./components/section";
 
 export function App() {
 	const [hasTouchedCorner, setHasTouchedCorner] = useState(false);
+	const [showDancingDuck, setShowDancingDuck] = useState(false);
+
 	const [titleRef] = useGlitch<HTMLHeadingElement>({ playMode: "hover" });
 
 	const [triggerEltRef] = useElevator<HTMLButtonElement>({
 		mainAudio: "/sfx/waiting.mp3",
 		endAudio: "/sfx/ding.mp3",
+		startCallback: () => setShowDancingDuck(true),
+		endCallback: () => setShowDancingDuck(false),
 	});
 
 	useCursors({
@@ -42,101 +47,103 @@ export function App() {
 	});
 
 	return (
-		<div className="space-y-10 flex flex-col max-w-150 lg:max-w-180 mx-auto mb-8 px-8">
-			<div className="flex flex-col items-center gap-8 h-screen pt-20 md:pt-50">
-				{/** biome-ignore lint/a11y/useSemanticElements: I want it to be a div */}
-				<div
-					className="flex flex-col gap-1 justify-center"
-					ref={fullTitleRef}
-					tabIndex={0}
-					role="button"
-					onKeyDown={(event) => {
-						if (!["Enter", " "].includes(event.key)) return;
-						if (dvdControls.isPlaying) return;
-						dvdControls.start();
-					}}
-					onClick={() => {
-						if (dvdControls.isPlaying) return;
-						dvdControls.start();
-					}}
-				>
-					<h1
-						className={`text-4xl md:text-5xl lg:text-7xl font-extrabold ${dvdControls.isPlaying ? "" : "text-(--title-color)"}`}
-						ref={titleRef}
+		<>
+			<DancingDuck show={showDancingDuck} />
+			<div className="space-y-10 flex flex-col max-w-150 lg:max-w-180 mx-auto mb-8 px-8">
+				<div className="flex flex-col items-center gap-8 h-screen pt-20 md:pt-50">
+					{/** biome-ignore lint/a11y/useSemanticElements: I want it to be a div */}
+					<div
+						className="flex flex-col gap-1 justify-center"
+						ref={fullTitleRef}
+						tabIndex={0}
+						role="button"
+						onKeyDown={(event) => {
+							if (!["Enter", " "].includes(event.key)) return;
+							if (dvdControls.isPlaying) return;
+							dvdControls.start();
+						}}
+						onClick={() => {
+							if (dvdControls.isPlaying) return;
+							dvdControls.start();
+						}}
 					>
-						KikooJS
-					</h1>
-					<span
-						className={`text-sm ${dvdControls.isPlaying ? "" : "text-gray-500"}`}
-					>
-						v{version}
-					</span>
-				</div>
-				<div>
-					<p>
-						You never asked for it, now it’s real. All the fun libs in one
-						package ✨
-					</p>
-				</div>
-
-				<Code lang="sh">npm install kikoojs</Code>
-
-				<div>
-					<p>
-						Try typing "hi", "no", "homer", "bravo" or "lol" (there is many
-						more, all options not listed here)
-					</p>
-					<span className="text-xs">
-						Powered by{" "}
-						<a
-							className="underline underline-offset-2"
-							href="https://github.com/WeiChiaChang/easter-egg-collection"
-							target="_blank"
-							rel="noopener"
+						<h1
+							className={`text-4xl md:text-5xl lg:text-7xl font-extrabold ${dvdControls.isPlaying ? "" : "text-(--title-color)"}`}
+							ref={titleRef}
 						>
-							Easter Eggs Collection
-						</a>
-					</span>
+							KikooJS
+						</h1>
+						<span
+							className={`text-sm ${dvdControls.isPlaying ? "" : "text-gray-500"}`}
+						>
+							v{version}
+						</span>
+					</div>
+					<div>
+						<p>
+							You never asked for it, now it’s real. All the fun libs in one
+							package ✨
+						</p>
+					</div>
+
+					<Code lang="sh">npm install kikoojs</Code>
+
+					<div>
+						<p>
+							Try typing "hi", "no", "homer", "bravo" or "lol" (there is many
+							more, all options not listed here)
+						</p>
+						<span className="text-xs">
+							Powered by{" "}
+							<a
+								className="underline underline-offset-2"
+								href="https://github.com/WeiChiaChang/easter-egg-collection"
+								target="_blank"
+								rel="noopener"
+							>
+								Easter Eggs Collection
+							</a>
+						</span>
+					</div>
+
+					<div className="flex-1" />
+
+					<div className="my-5">↓ Scroll down ↓</div>
 				</div>
 
-				<div className="flex-1" />
+				<div className="space-y-20">
+					<h2>How to use all the fun the library has to offer?</h2>
 
-				<div className="my-5">↓ Scroll down ↓</div>
-			</div>
-
-			<div className="space-y-20">
-				<h2>How to use all the fun the library has to offer?</h2>
-
-				<Section label="Easter Egg Collection">
-					<p>
-						Just add{" "}
-						<code>import 'kikoojs/easter-egg-collection-register';</code> at
-						your script entrypoint.
-					</p>
-					<p>
-						You can also manually instantiate it by calling the{" "}
-						<code>register()</code> method.
-					</p>
-					<Code>
-						{`import { register } from 'kikoojs/easter-egg-collection-register';
+					<Section label="Easter Egg Collection">
+						<p>
+							Just add{" "}
+							<code>import 'kikoojs/easter-egg-collection-register';</code> at
+							your script entrypoint.
+						</p>
+						<p>
+							You can also manually instantiate it by calling the{" "}
+							<code>register()</code> method.
+						</p>
+						<Code>
+							{`import { register } from 'kikoojs/easter-egg-collection-register';
 
 // Somewhere in your code
 register();
 
 // Now you can type "bravo", "lol", etc... and it just works™
 `}
-					</Code>
-				</Section>
+						</Code>
+					</Section>
 
-				<Section label="useCursor()">
-					<p>
-						<code>useCursor()</code> hook without parameter create a canvas on
-						the body of your webpage. You can enable multiple cursors at the
-						same time!
-					</p>
-					<p>I know some cursor are missing; I will add them later 😉</p>
-					<Code>
-						{`import { useCursor } from 'kikoojs';
+					<Section label="useCursor()">
+						<p>
+							<code>useCursor()</code> hook without parameter create a canvas on
+							the body of your webpage. You can enable multiple cursors at the
+							same time!
+						</p>
+						<p>I know some cursor are missing; I will add them later 😉</p>
+						<Code>
+							{`import { useCursor } from 'kikoojs';
 
 const MyPage = () => {
 
@@ -176,14 +183,14 @@ const MyPage = () => {
     <div>...</div>
   );
 }`}
-					</Code>
-				</Section>
+						</Code>
+					</Section>
 
-				<Section label="useDvd()">
-					<p>Animate any html element like the good old dvd logo</p>
+					<Section label="useDvd()">
+						<p>Animate any html element like the good old dvd logo</p>
 
-					<Code>
-						{`import { useDvd } from 'kikoojs';
+						<Code>
+							{`import { useDvd } from 'kikoojs';
 
 export const MyPage = () => {
   const [bouncingEltRef, { start }] = useDvd<HTMLButtonElement>();
@@ -205,14 +212,14 @@ export const MyPage = () => {
     <button ref={bouncingEltRef} onClick={() => start()} type="button">This button will bounce if clicked</button>
   );
 }`}
-					</Code>
-				</Section>
+						</Code>
+					</Section>
 
-				<Section label="useElevator()">
-					<p>Add a simple and fun way to trigger a scroll to top!</p>
+					<Section label="useElevator()">
+						<p>Add a simple and fun way to trigger a scroll to top!</p>
 
-					<Code>
-						{`import { useElevator } from 'kikoojs';
+						<Code>
+							{`import { useElevator } from 'kikoojs';
 
 export const MyPage = () => {
   const [triggerGoToTopEltRef, { isLoading }] = useElevator<HTMLButtonElement>({
@@ -239,16 +246,16 @@ export const MyPage = () => {
     </div>
   );
 }`}
-					</Code>
-				</Section>
+						</Code>
+					</Section>
 
-				<Section label="useGlitch()">
-					<p>
-						Thanks to the awesome PowerGlitch lib, this hook can make any
-						element glitch-able. It takes all options powerglitch supports!
-					</p>
-					<Code>
-						{`import { useGlitch } from 'kikoojs';
+					<Section label="useGlitch()">
+						<p>
+							Thanks to the awesome PowerGlitch lib, this hook can make any
+							element glitch-able. It takes all options powerglitch supports!
+						</p>
+						<Code>
+							{`import { useGlitch } from 'kikoojs';
 
 export const MyPage = () => {
   const [glitchEltRef] = useGlitch<HTMLHeadingElement>();
@@ -266,15 +273,16 @@ export const MyPage = () => {
   );
 }
 `}
-					</Code>
-				</Section>
+						</Code>
+					</Section>
 
-				<Section label="useKonamiCode()">
-					<p>
-						What is a website without easter eggs triggered from a konami code?
-					</p>
-					<Code>
-						{`import { useKonamiCode } from 'kikoojs';
+					<Section label="useKonamiCode()">
+						<p>
+							What is a website without easter eggs triggered from a konami
+							code?
+						</p>
+						<Code>
+							{`import { useKonamiCode } from 'kikoojs';
 
 export const MyPage = () => {
   useKonamiCode({
@@ -291,15 +299,16 @@ export const MyPage = () => {
     }
   });
 }`}
-					</Code>
-				</Section>
+						</Code>
+					</Section>
 
-				<Section label="useRainbow()">
-					<p>
-						Delightfull background color animation on the html element you want!
-					</p>
-					<Code>
-						{`import { useRainbow } from 'kikoojs';
+					<Section label="useRainbow()">
+						<p>
+							Delightfull background color animation on the html element you
+							want!
+						</p>
+						<Code>
+							{`import { useRainbow } from 'kikoojs';
 
 export const MyPage = () => {
   useRainbow(); // Yes, simple as that! It will animated background-color change on body
@@ -311,17 +320,18 @@ export const MyPage = () => {
     speed: 400             // color change speed
   });
 }`}
-					</Code>
-				</Section>
-			</div>
+						</Code>
+					</Section>
+				</div>
 
-			<button
-				ref={triggerEltRef}
-				className="bottom-5 right-5 bg-amber-200 text-amber-800 px-6 pt-4 pb-2 rounded font-bold cursor-pointer hover:shadow-2xl hover:scale-105 transition-all active:scale-95"
-				type="button"
-			>
-				ElevatorJS
-			</button>
-		</div>
+				<button
+					ref={triggerEltRef}
+					className="bottom-5 right-5 bg-amber-200 text-amber-800 px-6 pt-4 pb-2 rounded font-bold cursor-pointer hover:shadow-2xl hover:scale-105 transition-all active:scale-95"
+					type="button"
+				>
+					ElevatorJS
+				</button>
+			</div>
+		</>
 	);
 }
