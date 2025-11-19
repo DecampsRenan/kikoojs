@@ -1,9 +1,12 @@
 import { version } from "../../package.json";
+import * as effects from "../../src/";
 import { Title } from "./components/Title";
 
-// - voir pour vidéo minute kikoojs
-
 export function App() {
+	//   👇👇👇👇👇👇👇👇
+	// 👉 ADD FUN HERE 👈
+	//   👆👆👆👆👆👆👆👆
+
 	return (
 		<div className="space-y-10 flex flex-col max-w-150 mx-auto mb-8 px-8">
 			<div className="flex flex-col items-center gap-8 h-screen pt-20">
@@ -22,10 +25,6 @@ export function App() {
 					npm install kikoojs
 				</code>
 			</div>
-
-			<div className="h-1200" />
-
-			<button type="button">Top</button>
 		</div>
 	);
 }

@@ -12,7 +12,7 @@
 		"type": "git",
 		"url": "git+https://github.com/decampsrenan/kikoojs.git"
 	},
-	"author": "Renan Decamps <renan.decamps@mail.com>",
+	"author": "Renan Decamps <renan.decamps@gmail.com>",
 	"files": [
 		"dist"
 	],
@@ -61,22 +61,17 @@
 		"vitest": "4.0.8"
 	},
 	"dependencies": {
-		"@fontsource-variable/reddit-mono": "5.2.8",
 		"@fontsource/borel": "5.2.8",
-		"@tsparticles/react": "3.0.0",
 		"cursor-effects": "1.0.17",
 		"easter-egg-collection": "1.4.56",
 		"motion": "12.23.24",
 		"powerglitch": "2.5.0",
-		"ts-pattern": "5.9.0",
-		"tsparticles-engine": "2.12.0"
+		"ts-pattern": "5.9.0"
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [
-			"@tsparticles/engine",
 			"esbuild",
-			"lefthook",
-			"tsparticles-engine"
+			"lefthook"
 		],
 		"patchedDependencies": {
 			"cursor-effects": "patches/cursor-effects.patch"
