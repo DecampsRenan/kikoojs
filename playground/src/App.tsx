@@ -92,7 +92,7 @@ export function App() {
 
 					<Code lang="sh">npm install kikoojs</Code>
 
-					<div className="max-w-150 mt-5">
+					<div className="max-w-150 md:mt-5">
 						<p>
 							Try typing "hi", click the title, take the elevator! This lib has
 							many <span className="line-through">useless</span> fun things to
