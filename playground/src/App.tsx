@@ -11,6 +11,7 @@ import {
 } from "../../src";
 import { Code } from "./components/code";
 import { DancingDuck } from "./components/dancing-duck";
+import { QRcode } from "./components/qrcode-ces";
 import { Section } from "./components/section";
 
 export function App() {
@@ -39,6 +40,10 @@ export function App() {
 		},
 	});
 
+	const [qrcodeRef, qrcodeControls] = useDvd<HTMLImageElement>({
+		animateColor: true,
+	});
+
 	useRainbow<HTMLDivElement>({ enabled: hasTouchedCorner });
 
 	useKonamiCode({
@@ -49,7 +54,7 @@ export function App() {
 		<>
 			<DancingDuck show={showDancingDuck} />
 			<div className="space-y-10 flex flex-col max-w-150 lg:max-w-180 mx-auto mb-8 px-8">
-				<div className="flex flex-col items-center gap-8 h-screen pt-20 md:pt-50">
+				<div className="flex flex-col items-center gap-8 h-screen pt-10">
 					{/** biome-ignore lint/a11y/useSemanticElements: I want it to be a div */}
 					<div
 						className="flex flex-col gap-1 justify-center"
@@ -94,6 +99,8 @@ export function App() {
 							offer!
 						</p>
 					</div>
+
+					<QRcode ref={qrcodeRef} onClick={() => qrcodeControls.start()} />
 
 					<div className="flex-1" />
 
