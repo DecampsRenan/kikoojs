@@ -1,7 +1,7 @@
 
-<div style="text-align: center;">
+<p align="center">
   <img src="./docs/logo.png" alt="KikooJS logo" />
-</div>
+</p>
 
 
 
@@ -17,7 +17,7 @@ npm install kikoojs # yes, simple 😄
 
 ## What do you get ?
 
-I strongly recommend to check the [demo website](https://kikoojs.netlify.app).
+I strongly recommend to check the [demo website](https://kikoojs.fun).
 
 **Includes**:
 
@@ -27,41 +27,6 @@ I strongly recommend to check the [demo website](https://kikoojs.netlify.app).
 - 📀 DVD Screensaver effect
 - ✨ [Power Glitch Effect](https://github.com/7PH/powerglitch)
 - 🎮 Konami Code
-
-### `useElevator()`
-
-```tsx
-const MyPage = () => {
-  const [triggerRef] = useElevator<HTMLButtonElement>({
-    mainAudio: "/sfx/waiting.mp3",
-		endAudio: "/sfx/ding.mp3",
-  });
-
-  return (
-    <div>
-      {/* veryyyyyyyyy lonnnnnnnnnng bodyyyyyyyy */}
-      <button ref={triggerRef} type="button">Back to top ⬆️</button>
-    </div>
-  )
-}
-```
-
-### `import from 'easter-egg-collections/register'`
-
-### `useCursor()`
-
-### `useDvd()`
-
-### `useGlitch()`
-
-### `useRainbow()`
-
-### `useKonamiCode()`
-
-### Utilities
-
-- `useExternalScript()`: Frankly, I don't now how it is working 😅
-- `useAnimationFrame()`: Inspired by CSS Tricks (or Wes Bos ?) - I added controls on it. 
 
 ## Development
 
