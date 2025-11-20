@@ -83,11 +83,13 @@ export function App() {
 							v{version}
 						</span>
 					</div>
-					<div>
+					<div className="flex flex-col gap-1">
 						<p>
 							You never asked for it, now it’s real. All the fun libs in one
 							package ✨
 						</p>
+
+						<a className="underline text-center" href="https://github.com/DecampsRenan/kikoojs" target="_blank">⭐ Add a github star ⭐</a>
 					</div>
 
 					<Code lang="sh">npm install kikoojs</Code>
