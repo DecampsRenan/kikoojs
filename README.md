@@ -19,10 +19,6 @@ npm install kikoojs # yes, simple 😄
 
 I strongly recommend to check the [demo website](https://kikoojs.fun).
 
-<p align="center">
-  <img src="./qrcode.png" alt="KikooJS logo" />
-</p>
-
 **Includes**:
 
 - 🛗 [ElevatorJS](https://github.com/tholman/elevator.js)
