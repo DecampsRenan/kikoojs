@@ -89,7 +89,14 @@ export function App() {
 							package ✨
 						</p>
 
-						<a className="underline text-center" href="https://github.com/DecampsRenan/kikoojs" target="_blank">⭐ Add a github star ⭐</a>
+						<a
+							className="underline text-center"
+							href="https://github.com/DecampsRenan/kikoojs"
+							target="_blank"
+							rel="noopener"
+						>
+							⭐ Add a github star ⭐
+						</a>
 					</div>
 
 					<Code lang="sh">npm install kikoojs</Code>
