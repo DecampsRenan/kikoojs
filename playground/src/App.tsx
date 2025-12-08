@@ -11,7 +11,6 @@ import {
 } from "../../src";
 import { Code } from "./components/code";
 import { DancingDuck } from "./components/dancing-duck";
-import { QRcode } from "./components/qrcode-ces";
 import { Section } from "./components/section";
 
 export function App() {
@@ -108,8 +107,6 @@ export function App() {
 							offer!
 						</p>
 					</div>
-
-					<QRcode ref={qrcodeRef} onClick={() => qrcodeControls.start()} />
 
 					<div className="flex-1" />
 
